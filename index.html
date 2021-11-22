@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自制游戏库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /*cursor: url(image/icon/001-Weapon01.png), auto;*/
+        }
+
+        #canvas{
+            /*position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;*/
+        }
+
+        #canvas:hover {
+            cursor: none;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="BGM" controls="controls" autoplay loop></audio>
+    <audio id="SE" controls="controls" autoplay></audio>
+    <!--画布标签，width和height可改-->
+    <canvas id="canvas" width="640" height="480">您的浏览器版本不支持</canvas>
+    <script src="js/public.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/mouse.js"></script>
+    <script src="js/action.js"></script>
+    <script src="js/animate.js"></script>
+    <script src="js/private.js"></script>
+    <script src="./script.js"></script>
+    <script src="js/playScript.js"></script>
+    <script>
+        // 主程序
+        var __main = function () {
+            // 初始化游戏设置
+            game.init();
+            // 数据更新
+            setInterval(function () {
+                // 更新游戏设置
+                game.updata();
+                // 启用按键事件
+                action();
+                // 清屏
+                game.clear();
+                // 绘制剧情
+                Script(game.now);
+                // 绘制鼠标
+                mouse.draw();
+            }, 1000 / game.fps)
+        }
+        // 开始游戏
+        __main();
+    </script>
+</body>
+
+</html>
