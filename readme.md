@@ -253,3 +253,64 @@ ScriptIn // 剧本内核
 myScript // 剧本整体
 Script // 执行剧本
 ```
+
+#### TODO
+之后会重构成一个新的项目GameStudio，这是目前的考虑
+```
+/*
+FP vs OOP
+在gameLib中，我使用的是不成熟的FP（未作模块化管理）
+并且将其拆分成了多了js文件（其实没必要，这样反而不利于下载）
+于是，在gameStudio中，准备只有一个js文件
+但在是要继续使用函数式编程还是面向对象编程上，产生了踌躇
+JavaScript支持二者，那二者在JS中有何区别
+
+写法上:
+// OOP
+class Person {
+    // 构造函数
+    constructor(name) {
+        this.name = name
+    }
+    // 属性
+    age = 18
+    // 方法
+    init() {
+        age = 8
+        console.log ('${this.name} Finish')
+    }
+    say() {
+        console.log (`${this.name}: I'm ${this.age} years old.`)
+    }
+}
+let tom = new Person ('Tom')
+tom.init() // Tom Finish
+tom.say () // Tom: I'm 8 years old.
+
+// FP
+let create_persion = (name) => {
+    // 属性
+    let o = {
+        name,
+        age: 18
+    }
+    // 方法
+    o.say = () => {
+        console.log (`${o.name}: I'm ${o.age} years old.`)
+    }
+    // 直接允许的函数
+    o.age = 8
+    console.log (`${o.name} Finish')
+    return o
+}
+let tom = create_persion ('Tom') // Tom Finish
+tom.say () // Tom: I'm 8 years old.
+
+二者区别：
+OOP: 内部不能直接调用函数，非要的话，可以写在constructor中，但这样的话，被继承时也会调用
+FP: 不能(简单)继承（需要修改原型链），且实例化两个相同对象，占用两块内存
+
+注：其实上述的那个例子，不能算是真正的FP，它仅仅是套着函数的外壳（即最外层只有函数）
+但并没有完成FP的思想，面向功能
+*/
+```
